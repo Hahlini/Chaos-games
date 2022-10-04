@@ -69,86 +69,7 @@ public class ChaosGame{
         } else {
             throw new IllegalArgumentException("Ogiltig typ");
         }
-
-        
-        
-            
-
     }
-
-    //triangle
-    /*
-    double step = 1.0/2.0;
-    int nCorners = 3;
-    private int[] corner1 = {width, height};
-    private int[] corner2 = {0, height};
-    private int[] corner3 = {width/2, 0};
-    private int[] corner4 = {};
-    private int[] corner5 = {};
-    private int[] corner6 = {};
-    private int[] corner7 = {};
-    private int[] corner8 = {};
-    */
-    
-    //These vere methods used to make sure that starting points were assigned resonable values which turned out to be unessesary
-    //because the itterative process converges either way.
-    /*
-    private int triangleFunction1(int x){
-        return (2*x);
-    }
-    private int triangleFunction2(int x){
-        return (-2*x);
-    }
-    public int[] generateTrianglePoint(){
-        int max = width;
-        int min = 0;
-        int range = max - min + 1;
- 
-        int x = (int)(Math.random() * range) + min;
-        int y = (int)(Math.random() * range) + min;
-
-        System.out.println(x + ":" + y);
-
-        if(y < triangleFunction1(x) && y < triangleFunction2(x)){
-            int[] list = {x, y};
-            return (list);
-        } else {
-            return(generateTrianglePoint());
-        }
-    }
-    */
-            
-        
-        
-
-    //square with midpoints
-    /* 
-    private double step = 2.0/3.0;
-    private int nCorners = 8;
-    private int[] corner1 = {0, 0};
-    private int[] corner2 = {width, 0};
-    private int[] corner3 = {0, height};
-    private int[] corner4 = {width, height};
-    private int[] corner5 = {width/2, 0};
-    private int[] corner6 = {0, height/2};
-    private int[] corner7 = {width/2, height};
-    private int[] corner8 = {width, height/2};
-    */
-
-    //pentagon
-    /*
-    private int nCorners = 5;
-    private double step = 1.0/1.61803398875;
-    private int[] corner1 = {width/5, 0};
-    private int[] corner2 = {width - width/5, 0};
-    private int[] corner3 = {0, height / 5 * 3};
-    private int[] corner4 = {width, height / 5 * 3};
-    private int[] corner5 = {width/2, height};
-    private int[] corner6 = {};
-    private int[] corner7 = {};
-    private int[] corner8 = {};
-    */
-     
 
     public int[] generatePoint(){
         int max = width;
@@ -195,8 +116,7 @@ public class ChaosGame{
             newX = (int)(x + (corner8[0]-x)*step);
             newY = (int)(y + (corner8[1]-y)*step);
         }
-
-            
+           
         int[] newPoint = {newX, newY} ;
         return (newPoint);
     }
@@ -212,9 +132,6 @@ public class ChaosGame{
         int g = 255; 
         int b = 0; 
         int p = (a<<24) | (r<<16) | (g<<8) | b; 
-
-        
-
 
         for (ChaosGame n : preset) {
             BufferedImage img = null;
@@ -237,30 +154,5 @@ public class ChaosGame{
                 System.out.println("Error: " + e);
             }
         }
-
-        
-
-
-
-
-        /*
-        // Create buffered image object
-        BufferedImage img = null;
-        img = new BufferedImage(preset[0].width, preset[0].height, BufferedImage.TYPE_INT_ARGB);
-  
-        // file object
-        File f = null;
-
-        int[] point = chaosgame.generatePoint();
-        
-
-        for (int i = 0 ; i < 10000000; i++){
-            point = chaosgame.itteratePoint(point);
-            img.setRGB(point[0], point[1], p);             
-        }
-        */
-        
     }
-    
-    
 }

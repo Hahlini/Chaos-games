@@ -6,3 +6,5 @@ A chaos game is a way of generating fractals through different itterative proces
 
 
 <img src="images/ChaosGameFractal3-4000x3500.png" width="250"><img src="images/ChaosGameFractal8-4000x4000.png" width="250"><img src="images/ChaosGameFractal5-4000x4000.png" width="250">
+
+Further reading: https://en.wikipedia.org/wiki/Chaos_game

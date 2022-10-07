@@ -10,9 +10,14 @@ public class ChaosGame{
     private int nCorners;
     private double step;
     private int lastCorner;
-    private String requirements;
+    private String requirement;
     private String id;
     private boolean hasRequirements;
+    private boolean TwoInRowNotNeighbour;
+    private boolean NotLastCorner;
+    private boolean NotOneAway;
+    private boolean NotTwoAway;
+
     private int[] corner0 = {0, 0};
     private int[] corner1 = {0, 0};
     private int[] corner2 = {0, 0};
@@ -23,15 +28,14 @@ public class ChaosGame{
     private int[] corner7 = {0, 0};
 
 
-    public ChaosGame(int height, int width, int itterations, double step, String type, String requirements) {
+    public ChaosGame(int height, int width, int itterations, double step, String type, String requirement) {
         this.height = height;
         this.width = width;
         this.itterations = itterations;
         this.step = step;
-        this.requirements = requirements;
-        this.hasRequirements = (requirements == "") ? false : true;
-        this.id = type + "_" + requirements + "_";
-
+        this.requirement = requirement;
+        this.hasRequirements = (requirement == "") ? false : true;
+        this.id = type + "_" + requirement + "_";
 
         if(type == "Triangle"){
             nCorners = 3;
@@ -42,7 +46,22 @@ public class ChaosGame{
             this.corner0 = corner0;
             this.corner1 = corner1;
             this.corner2 = corner2;
-        } else if (type == "Square"){
+        } else if(type == "Triangle+Midpoints"){
+            nCorners = 6;
+            int[] corner0 = {width, height};
+            int[] corner1 = {width * 3 / 4,height/2}; 
+            int[] corner2 = {width/2, 0};
+            int[] corner3 = {width / 4, height/2};
+            int[] corner4 = {0, height};
+            int[] corner5 = {width / 2, height};
+
+            this.corner0 = corner0;
+            this.corner1 = corner1;
+            this.corner2 = corner2;
+            this.corner3 = corner3;
+            this.corner4 = corner4;
+            this.corner5 = corner5;
+        }else if (type == "Square"){
             nCorners = 4;
             int[] corner0 = {0, 0};
             int[] corner1 = {width, 0};
@@ -57,13 +76,13 @@ public class ChaosGame{
         } else if (type == "Square+Midpoints") {
             nCorners = 8;
             int[] corner0 = {0, 0};
-            int[] corner1 = {width, 0};
-            int[] corner2 = {0, height};
-            int[] corner3 = {width, height};
-            int[] corner4 = {width/2, 0};
-            int[] corner5 = {0, height/2};
-            int[] corner6 = {width/2, height};
-            int[] corner7 = {width, height/2};
+            int[] corner1 = {width/2, 0};
+            int[] corner2 = {width, 0};
+            int[] corner3 = {width, height/2};
+            int[] corner4 = {width, height};
+            int[] corner5 = {width/2, height};
+            int[] corner6 = {0, height};
+            int[] corner7 = {0, height/2};
 
             this.corner0 = corner0;
             this.corner1 = corner1;
@@ -158,33 +177,33 @@ public class ChaosGame{
 
     boolean twoInARow = false;
 
-    public int[] itteratePoint(int[] point, String requirements){
+    public int[] itteratePointReq(int[] point){
         int x = point[0];
         int y = point[1];
 
         int corner = (int)(Math.random() * nCorners);
-        
-        if (twoInARow){
-            while (corner == (lastCorner + 1) % nCorners || (corner + 1) % nCorners == lastCorner)
-            corner = (int)(Math.random() * nCorners);
-        }
+        Boolean goal = false;
 
-        if (requirements == "NotLastCorner"){
-            corner = (lastCorner + (int)(Math.random() * (nCorners-1) + 1)) % nCorners;
-        } else if (requirements == "Not1Away"){
-            corner = (lastCorner + (int)(Math.random() * (nCorners-1))) % nCorners;
-        } else if (requirements == "Not2Away"){
-            corner = (lastCorner + (int)(Math.random() * (nCorners-1))+3) % nCorners;
+        while(goal == false){
+            corner = (int)(Math.random() * nCorners);
+            if(twoInARow && TwoInRowNotNeighbour && (corner == (lastCorner + 1) % nCorners || (corner + 1) % nCorners == lastCorner)){
+                corner = (int)(Math.random() * nCorners);
+            } else if(NotLastCorner && corner ==lastCorner){
+                corner = (int)(Math.random() * nCorners);
+            } else if(NotOneAway && corner == (lastCorner + 1) % nCorners){
+                corner = (int)(Math.random() * nCorners);
+            } else if(NotTwoAway && corner == (lastCorner + 2) % nCorners){
+                corner = (int)(Math.random() * nCorners);
+            } else {
+                goal = true;
+            }
         }
 
         this.twoInARow = false;
-        
         int newX = 0;
         int newY = 0;
 
-        
-
-        if (requirements == "2InRowNotNeighbour" && corner == lastCorner){
+        if (TwoInRowNotNeighbour && corner == lastCorner){
             this.twoInARow = true;
         }
         if (corner == 0){
@@ -215,30 +234,60 @@ public class ChaosGame{
            
         int[] newPoint = {newX, newY} ;
         lastCorner = corner;
-        return (newPoint);
+        return (newPoint);  
+    }
 
+    public void preppRequirements(String requirement){
+        String[] requirementList = requirement.split("-");
+
+        for (String req : requirementList) {
+            if(req.equals("TwoInRowNotNeighbour")){
+                this.TwoInRowNotNeighbour = true;
+            } 
+            if(req.equals("NotLastCorner")) {
+                this.NotLastCorner = true;
+            }
+            if(req.equals("NotOneAway")) {
+                this.NotOneAway = true;
+            } 
+            if(req.equals("NotTwoAway")){
+                this.NotTwoAway = true;
+            }
+        }
         
     }
 
 
     public static void main(String args[]){
-        ChaosGame[] preset = new ChaosGame[16];
+
+        
+        //main
+        
+        ChaosGame[] preset = new ChaosGame[22];
         preset[0] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Triangle", "");
         preset[1] = new ChaosGame(2000, 2000, 1000000, 2.0/3.0, "Square+Midpoints", "");
         preset[2] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Square", "NotLastCorner");
-        preset[3] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Square", "Not1Away");
-        preset[4] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Square", "Not2Away");
-        preset[5] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Square", "2InRowNotNeighbour");
+        preset[3] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Square", "NotOneAway");
+        preset[4] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Square", "NotTwoAway");
+        preset[5] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Square", "TwoInRowNotNeighbour");
         preset[6] = new ChaosGame(2000, 2000, 1000000, 1.0/1.61803398875, "Pentagon", "");
         preset[7] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Pentagon", "NotLastCorner");
-        preset[8] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Pentagon", "Not1Away");
-        preset[9] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Pentagon", "Not2Away");
-        preset[10] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Pentagon", "2InRowNotNeighbour");
+        preset[8] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Pentagon", "NotOneAway");
+        preset[9] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Pentagon", "NotTwoAway");
+        preset[10] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Pentagon", "TwoInRowNotNeighbour");
         preset[11] = new ChaosGame(2000, 2000, 1000000, 2.0/3.0, "Hexagon", "");
+        preset[11] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Hexagon", "");
         preset[12] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Hexagon", "NotLastCorner");
-        preset[13] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Hexagon", "Not1Away");
-        preset[14] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Hexagon", "Not2Away");
-        preset[15] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Triangle", "2InRowNotNeighbour");
+        preset[13] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Hexagon", "NotOneAway");
+        preset[14] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Hexagon", "NotTwoAway");
+        preset[15] = new ChaosGame(2000, 2000, 1000000, 2.0/3.0, "Square+Midpoints", "NotLastCorner-NotTwoAway");
+        preset[16] = new ChaosGame(2000, 2000, 1000000, 2.0/3.0, "Hexagon", "NotLastCorner-NotTwoAway");
+        preset[17] = new ChaosGame(2000, 2000, 1000000, 2.0/3.0, "Square+Midpoints", "NotLastCorner-TwoInRowNotNeighbour");
+        preset[18] = new ChaosGame(2000, 2000, 1000000, 2.0/3.0, "Square+Midpoints", "NotLastCorner-NotOneAway");
+        preset[19] = new ChaosGame(2000, 2000, 1000000, 2.0/3.0, "Triangle+Midpoints", "NotOneAway-NotTwoAway");
+        preset[20] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Triangle+Midpoints", "NotOneAway-NotTwoAway");
+        preset[21] = new ChaosGame(2000, 2000, 1000000, 1.0/2.0, "Triangle+Midpoints", "TwoInRowNotNeighbour");
+        
 
         int a = 255;
         int r = 255;
@@ -253,8 +302,9 @@ public class ChaosGame{
             int[] point = n.generatePoint();
 
             if (n.hasRequirements){
+                n.preppRequirements(n.requirement);
                 for (int i = 0 ; i < n.itterations; i++){
-                    point = n.itteratePoint(point, n.requirements);
+                    point = n.itteratePointReq(point);
                     img.setRGB(point[0], point[1], p);
                 }
             } else {
@@ -266,7 +316,7 @@ public class ChaosGame{
         
             try
             {
-                f = new File("images\\ChaosGameFractal_" + n.id + n.width + "x" + n.height + ".png");
+                f = new File("images\\ChaosGameFractal_" + n.id + n.width + "x" + n.height + "-" + (int)(n.step*100) + ".png");
                 ImageIO.write(img, "png", f);
             }
             catch(IOException e)

@@ -13,6 +13,7 @@ In addition it is possible to create different patterns by imposing requirements
 
 ### Generalising with affine transformations
 These algorithms use affine transformation to create selfsimilar shapes. By finetuning these transformations we can create many facsinating fractals such as the Barnsley Fern 
+
 <img src = "images/BarnsleyFern.png" width=300>
 
 Further reading: 

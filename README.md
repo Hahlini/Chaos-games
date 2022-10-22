@@ -9,11 +9,11 @@ A chaos game is a way of generating fractals through different itterative proces
 
 In addition it is possible to create different patterns by imposing requirements on which points the algorithm is allowed to choose. For example the following fractal was created with the restriction that if the same point got choosen two times in a row the following point could not neighbour the repeating point:
 
-<img src="images/ChaosGameFractal_Square_TwoInRowNotNeighbour_2000x2000-50.png" width="400"> 
+<img src="images/ChaosGameFractal_Square_TwoInRowNotNeighbour_2000x2000-50.png" width="300"> 
 
 And these two with the restriction that the same point couldn't be picked two times in a row:
 
-<img src="images/ChaosGameFractal_Pentagon_NotLastCorner_2000x2000-50.png" width="450"><img src="images/ChaosGameFractal_Square_NotLastCorner_2000x2000-50.png" width="400">
+<img src="images/ChaosGameFractal_Pentagon_NotLastCorner_2000x2000-50.png" width="350"><img src="images/ChaosGameFractal_Square_NotLastCorner_2000x2000-50.png" width="400">
 
 
 Further reading: https://en.wikipedia.org/wiki/Chaos_game

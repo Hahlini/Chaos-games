@@ -11,9 +11,9 @@ In addition it is possible to create different patterns by imposing requirements
 
 <img src="images/ChaosGameFractal_Square_TwoInRowNotNeighbour_2000x2000-50.png" width="400"> 
 
-And this one with the restriction that the same point couldn't be picked two times in a row:
+And these two with the restriction that the same point couldn't be picked two times in a row:
 
-<img src="images/ChaosGameFractal_Pentagon_NotLastCorner_2000x2000-50.png" width="450">
+<img src="images/ChaosGameFractal_Pentagon_NotLastCorner_2000x2000-50.png" width="450"><img src="images/ChaosGameFractal_Square_NotLastCorner_2000x2000-50.png" width="400">
 
 
 Further reading: https://en.wikipedia.org/wiki/Chaos_game

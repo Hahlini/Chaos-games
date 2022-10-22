@@ -16,7 +16,7 @@ And these two with the restriction that the same point couldn't be picked two ti
 <img src="images/ChaosGameFractal_Pentagon_NotLastCorner_2000x2000-50.png" width="350"><img src="images/ChaosGameFractal_Square_NotLastCorner_2000x2000-50.png" width="300">
 
 ### Generalising with affine transformations
-<im src = "images/BarnsleyFern" width=400>
+<img src = "images/BarnsleyFern" width=400>
 
 
 

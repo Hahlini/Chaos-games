@@ -12,9 +12,8 @@ In addition it is possible to create different patterns by imposing requirements
 <img src="images/ChaosGameFractal_Square_TwoInRowNotNeighbour_2000x2000-50.png" width="250"><img src="images/ChaosGameFractal_Pentagon_NotLastCorner_2000x2000-50.png" width="300"><img src="images/ChaosGameFractal_Square_NotLastCorner_2000x2000-50.png" width="250">
 
 ### Generalising with affine transformations
-<<<<<<< HEAD
 These algorithms use affine transformation to create selfsimilar shapes. By finetuning these transformations we can create many facsinating fractals such as the Barnsley Fern 
-<img src = "images/BarnsleyFern" width=300>
+<img src = "images/BarnsleyFern.png" width=300>
 
 Further reading: 
 https://en.wikipedia.org/wiki/Chaos_game

@@ -10,7 +10,7 @@ A chaos game is a way of generating fractals through different itterative proces
 In addition it is possible to create different patterns by imposing requirements on which points the algorithm is allowed to choose. For example the following fractals were created with the restriction that if the same point got choosen two times in a row the following point could not neighbour the repeating point:
 
 <img src="images/ChaosGameFractal_Square_TwoInRowNotNeighbour_2000x2000-50.png" width="400">
-<img src="images/ChaosGameFractal_Penatagon_TwoInRowNotNeighbour_2000x2000-50.png" width="400">
+<img src="images/ChaosGameFractal_Pentagon_TwoInRowNotNeighbour_2000x2000-50.png" width="400">
 
 
 Further reading: https://en.wikipedia.org/wiki/Chaos_game

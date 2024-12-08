@@ -16,6 +16,6 @@ These algorithms use affine transformation to create self similar shapes. By fin
 <img src = "images/BarnsleyFern.png" width=300>
 
 Further reading: 
-https://en.wikipedia.org/wiki/Chaos_game
+https://en.wikipedia.org/wiki/Chaos_game,
 https://en.wikipedia.org/wiki/Barnsley_fern
 
